@@ -44,3 +44,33 @@ func (ll *LinkedList[T]) Push(element T) {
 	ll.count++
 
 }
+
+// RemoveAt removes a specific element from the list
+func (ll *LinkedList[T]) RemoveAt(position int) (T, bool) {
+
+	if position >= 0 && position < ll.count {
+
+		current := ll.Head
+
+		if position == 0 {
+			ll.Head = current.Next
+			return current.Element, true
+		}
+
+		var previous *Node[T]
+
+		for range position {
+			previous = current
+			current = current.Next
+		}
+
+		previous.Next = current.Next
+		ll.count--
+		return current.Element, true
+
+	}
+
+	var zero T
+	return zero, false
+
+}
