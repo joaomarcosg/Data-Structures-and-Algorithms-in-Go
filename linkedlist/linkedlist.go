@@ -74,3 +74,23 @@ func (ll *LinkedList[T]) RemoveAt(position int) (T, bool) {
 	return zero, false
 
 }
+
+// GetElementAt returns an element that is at a specif position
+func (ll *LinkedList[T]) GetElementAt(position int) (*Node[T], bool) {
+
+	if position >= 0 && position <= ll.count {
+
+		node := ll.Head
+
+		for range position {
+			node = node.Next
+		}
+
+		return node, true
+
+	}
+
+	var zero T
+	return &Node[T]{Element: zero}, false
+
+}
