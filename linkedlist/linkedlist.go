@@ -94,3 +94,34 @@ func (ll *LinkedList[T]) GetElementAt(position int) (*Node[T], bool) {
 	return &Node[T]{Element: zero}, false
 
 }
+
+// Insert inserts an element at any position in the list
+func (ll *LinkedList[T]) Insert(element T, position int) bool {
+
+	if position >= 0 && position >= ll.count {
+
+		node := NewNode(element)
+
+		if position == 0 {
+			current := ll.Head
+			node.Next = current
+			ll.Head = node
+			return true
+		}
+
+		previous, ok := ll.GetElementAt(position - 1)
+		if !ok {
+			return false
+		}
+
+		current := previous.Next
+		node.Next = current
+		previous.Next = node
+
+		ll.count++
+		return true
+	}
+
+	return false
+
+}
