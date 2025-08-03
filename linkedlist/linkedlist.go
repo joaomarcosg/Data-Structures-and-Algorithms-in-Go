@@ -144,3 +144,14 @@ func (ll *LinkedList[T]) IndexOf(element T) int {
 	return -1
 
 }
+
+// Remove removes a given element usign IndexOf and RemoveAt methods
+func (ll *LinkedList[T]) Remove(element T) bool {
+
+	index := ll.IndexOf(element)
+
+	_, ok := ll.RemoveAt(index)
+
+	return ok
+
+}
