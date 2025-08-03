@@ -15,12 +15,13 @@ func NewNode[T any](element T) *Node[T] {
 
 // Linkedlist structure with count representing the size of the list and its Head
 type LinkedList[T any] struct {
-	Head  *Node[T]
-	count int
+	Head   *Node[T]
+	count  int
+	equals func(a, b T) bool
 }
 
 // NewLinkedList creates and returns a new Linked List
-func NewLinkedList[T any]() *LinkedList[T] {
+func NewLinkedList[T any](equals func(a, b T) bool) *LinkedList[T] {
 	return &LinkedList[T]{}
 }
 
