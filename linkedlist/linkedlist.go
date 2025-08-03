@@ -155,3 +155,18 @@ func (ll *LinkedList[T]) Remove(element T) bool {
 	return ok
 
 }
+
+// Size returns the numbers of elements in the linked list
+func (ll *LinkedList[T]) Size() int {
+	return ll.count
+}
+
+// IsEmpty returns true if the linked list is empty
+func (ll *LinkedList[T]) IsEmpty() bool {
+	return ll.count == 0
+}
+
+// Gethead returns the first element in the linked list
+func (ll *LinkedList[T]) GetHead() *Node[T] {
+	return ll.Head
+}
