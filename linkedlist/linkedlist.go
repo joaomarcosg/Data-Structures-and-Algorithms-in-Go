@@ -128,12 +128,12 @@ func (ll *LinkedList[T]) Insert(element T, position int) bool {
 }
 
 // IndexOf returns a position of a given element
-func (ll *LinkedList[T]) IndexOf(element T, equals func(a, b T) bool) int {
+func (ll *LinkedList[T]) IndexOf(element T) int {
 
 	current := ll.Head
 	for i := 0; i < ll.count && current != nil; i++ {
 
-		if equals(element, current.Element) {
+		if ll.equals(element, current.Element) {
 			return i
 		}
 
