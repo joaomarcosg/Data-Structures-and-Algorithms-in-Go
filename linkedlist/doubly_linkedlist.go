@@ -18,9 +18,10 @@ func NewDoublyNode[T any](element T) *DoublyNode[T] {
 
 // DoublyLinkedList structure representing the doubly linked list and its Head, Tail and Count (the size)
 type DoublyLinkedList[T any] struct {
-	Head  *DoublyNode[T]
-	Tail  *DoublyNode[T]
-	Count int
+	Head   *DoublyNode[T]
+	Tail   *DoublyNode[T]
+	Count  int
+	equals func(a, b T) bool
 }
 
 // NewDoublyLinkedList creates and returns a new Doubly Linked List
