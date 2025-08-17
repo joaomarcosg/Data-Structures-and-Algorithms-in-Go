@@ -61,7 +61,7 @@ func (dll *DoublyLinkedList[T]) Insert(element T, position int) bool {
 				dll.Head = node
 				dll.Tail = node
 			}
-			node = dll.Head
+			node.Next = dll.Head
 			current.Prev = node
 			dll.Head = node
 		}
