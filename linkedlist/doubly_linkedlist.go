@@ -83,7 +83,6 @@ func (dll *DoublyLinkedList[T]) Insert(element T, position int) bool {
 		if !ok {
 			return false
 		}
-
 		current = previous.Next
 		node.Next = current
 		previous.Next = node
@@ -95,5 +94,52 @@ func (dll *DoublyLinkedList[T]) Insert(element T, position int) bool {
 	}
 
 	return false
+
+}
+
+func (dll *DoublyLinkedList[T]) RemoveAt(position int) (T, bool) {
+
+	if position >= 0 && position < dll.Count {
+
+		current := dll.Head
+
+		if position == 0 {
+			dll.Head = current.Next
+			if dll.Count == 1 {
+				dll.Tail = nil
+			} else {
+				dll.Head.Prev = nil
+			}
+
+			dll.Count--
+			return current.Element, true
+
+		}
+
+		if position == dll.Count-1 {
+			current = dll.Tail
+			dll.Tail = current.Prev
+			dll.Tail = nil
+			dll.Count--
+			return current.Element, true
+		}
+
+		current, ok := dll.GetElementAt(position)
+		if !ok {
+			var zero T
+			return zero, false
+		}
+
+		previous := current.Prev
+		previous.Next = current.Next
+		current.Next.Prev = previous
+
+		dll.Count--
+		return current.Element, true
+
+	}
+
+	var zero T
+	return zero, false
 
 }
