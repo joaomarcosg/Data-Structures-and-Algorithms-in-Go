@@ -97,6 +97,7 @@ func (dll *DoublyLinkedList[T]) Insert(element T, position int) bool {
 
 }
 
+// RemoveAt removes a specific element from the doubly list
 func (dll *DoublyLinkedList[T]) RemoveAt(position int) (T, bool) {
 
 	if position >= 0 && position < dll.Count {
