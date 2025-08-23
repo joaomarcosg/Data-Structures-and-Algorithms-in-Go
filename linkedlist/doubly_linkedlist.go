@@ -60,10 +60,14 @@ func (dll *DoublyLinkedList[T]) Insert(element T, position int) bool {
 			if dll.Head == nil {
 				dll.Head = node
 				dll.Tail = node
+			} else {
+				node.Next = dll.Head
+				current.Prev = node
+				dll.Head = node
 			}
-			node.Next = dll.Head
-			current.Prev = node
-			dll.Head = node
+			dll.Count++
+			return true
+
 		}
 
 		if position == dll.Count {
@@ -71,12 +75,15 @@ func (dll *DoublyLinkedList[T]) Insert(element T, position int) bool {
 			current.Next = node
 			node.Prev = current
 			dll.Tail = node
+			dll.Count++
+			return true
 		}
 
 		previous, ok := dll.GetElementAt(position - 1)
 		if !ok {
 			return false
 		}
+
 		current = previous.Next
 		node.Next = current
 		previous.Next = node
