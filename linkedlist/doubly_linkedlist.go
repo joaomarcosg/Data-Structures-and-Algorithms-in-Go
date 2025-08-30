@@ -120,7 +120,7 @@ func (dll *DoublyLinkedList[T]) RemoveAt(position int) (T, bool) {
 		if position == dll.Count-1 {
 			current = dll.Tail
 			dll.Tail = current.Prev
-			dll.Tail = nil
+			dll.Tail.Next = nil
 			dll.Count--
 			return current.Element, true
 		}
