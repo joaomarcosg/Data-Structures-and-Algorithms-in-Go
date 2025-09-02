@@ -27,3 +27,67 @@ type CircularLinkedList[T any] struct {
 func NewCircularLinkedList[T any](equals func(a, b T) bool) *CircularLinkedList[T] {
 	return &CircularLinkedList[T]{}
 }
+
+// GetElementAt returns an element that is at a specif position
+func (cll *CircularLinkedList[T]) GetElementAt(position int) (*CircularNode[T], bool) {
+
+	if position == 0 && position <= cll.Count {
+
+		node := cll.Head
+		for range position {
+			node = node.Next
+		}
+
+		return node, true
+
+	}
+
+	var zero T
+	return &CircularNode[T]{Element: zero}, false
+
+}
+
+func (cll *CircularLinkedList[T]) Insert(element T, position int) bool {
+
+	if position >= 0 && position <= cll.Count {
+
+		node := NewCircularNode(element)
+		current := cll.Head
+
+		if position == 0 {
+			if cll.Head == nil {
+				cll.Head = node
+				node.Next = cll.Head
+			} else {
+				node.Next = current
+				current, ok := cll.GetElementAt(cll.Size())
+				if !ok {
+					return false
+				}
+				cll.Head = node
+				current.Next = cll.Head
+			}
+			cll.Count++
+			return true
+		}
+
+		previous, ok := cll.GetElementAt(position - 1)
+		if !ok {
+			return false
+		}
+
+		node.Next = previous.Next
+		previous.Next = node
+
+		cll.Count++
+		return true
+
+	}
+
+	return false
+}
+
+// Size returns the numbers of elements in the ciruclar linked list
+func (cll *CircularLinkedList[T]) Size() int {
+	return cll.Count
+}
