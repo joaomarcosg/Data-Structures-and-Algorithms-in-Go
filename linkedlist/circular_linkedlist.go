@@ -91,3 +91,41 @@ func (cll *CircularLinkedList[T]) Insert(element T, position int) bool {
 func (cll *CircularLinkedList[T]) Size() int {
 	return cll.Count
 }
+
+func (cll *CircularLinkedList[T]) RemoveAt(position int) (T, bool) {
+
+	if position >= 0 && position < cll.Count {
+
+		current := cll.Head
+
+		if position == 0 {
+			if cll.Size() == 1 {
+				cll.Head = nil
+			} else {
+				removed := cll.Head
+				current, ok := cll.GetElementAt(cll.Size())
+				if !ok {
+					return current.Element, false
+				}
+				cll.Head = cll.Head.Next
+				current.Next = cll.Head
+				current = removed
+			}
+		}
+
+		previous, ok := cll.GetElementAt(position - 1)
+		if !ok {
+			return previous.Element, false
+		}
+
+		current = previous.Next
+		previous.Next = current.Next
+
+		cll.Count--
+		return current.Element, true
+
+	}
+
+	var zero T
+	return zero, false
+}
