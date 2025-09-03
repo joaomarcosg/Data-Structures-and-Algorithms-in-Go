@@ -47,6 +47,7 @@ func (cll *CircularLinkedList[T]) GetElementAt(position int) (*CircularNode[T], 
 
 }
 
+// Insert inserts an element at any position in the circular linked list
 func (cll *CircularLinkedList[T]) Insert(element T, position int) bool {
 
 	if position >= 0 && position <= cll.Count {
@@ -92,6 +93,7 @@ func (cll *CircularLinkedList[T]) Size() int {
 	return cll.Count
 }
 
+// RemoveAt removes a specific element from the circular linked list
 func (cll *CircularLinkedList[T]) RemoveAt(position int) (T, bool) {
 
 	if position >= 0 && position < cll.Count {
