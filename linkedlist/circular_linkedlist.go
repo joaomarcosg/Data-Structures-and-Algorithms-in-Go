@@ -102,24 +102,27 @@ func (cll *CircularLinkedList[T]) RemoveAt(position int) (T, bool) {
 
 		if position == 0 {
 			if cll.Size() == 1 {
-				removed := cll.Head
 				cll.Head = nil
-				cll.Tail = nil
-				cll.Count--
-				return removed.Element, true
+			} else {
+				removed := cll.Head
+				current, ok := cll.GetElementAt(cll.Size())
+				if !ok {
+					var zero T
+					return zero, false
+				}
+				cll.Head = cll.Head.Next
+				current.Next = cll.Head
+				current = removed
 			}
 
-			removed := cll.Head
-			cll.Head = cll.Head.Next
-			cll.Head.Prev = cll.Tail
-			cll.Tail.Next = cll.Head
 			cll.Count--
-			return removed.Element, true
+			return current.Element, true
 		}
 
 		previous, ok := cll.GetElementAt(position - 1)
 		if !ok {
-			return previous.Element, false
+			var zero T
+			return zero, false
 		}
 
 		current = previous.Next
