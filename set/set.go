@@ -16,3 +16,13 @@ func New[T comparable]() *Set[T] {
 func (st *Set[T]) Has(element T) bool {
 	return st.Items[element]
 }
+
+// Add adds a new element in the set
+func (st *Set[T]) Add(element T) bool {
+	if !st.Has(element) {
+		st.Items[element] = true
+		return true
+	}
+
+	return false
+}
