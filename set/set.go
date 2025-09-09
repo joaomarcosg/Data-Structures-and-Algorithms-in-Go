@@ -36,3 +36,8 @@ func (st *Set[T]) Delete(element T) bool {
 
 	return false
 }
+
+// Size returns how many elements are in the set
+func (st *Set[T]) Size() int {
+	return len(st.Items)
+}
