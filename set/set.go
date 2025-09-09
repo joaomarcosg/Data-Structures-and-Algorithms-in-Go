@@ -26,3 +26,13 @@ func (st *Set[T]) Add(element T) bool {
 
 	return false
 }
+
+// Delete removes an element from the set
+func (st *Set[T]) Delete(element T) bool {
+	if st.Has(element) {
+		delete(st.Items, element)
+		return true
+	}
+
+	return false
+}
