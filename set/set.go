@@ -41,3 +41,12 @@ func (st *Set[T]) Delete(element T) bool {
 func (st *Set[T]) Size() int {
 	return len(st.Items)
 }
+
+// Values returns an array with all the elements in the set
+func (st *Set[T]) Values() []T {
+	keys := make([]T, 0, len(st.Items))
+	for key := range st.Items {
+		keys = append(keys, key)
+	}
+	return keys
+}
