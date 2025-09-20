@@ -62,3 +62,22 @@ func (st *Set[T]) Union(otherSet Set[T]) *Set[T] {
 	}
 	return unionSet
 }
+
+// Intersection returns a new set with elements present in both sets
+func (st *Set[T]) Intersection(otherSet *Set[T]) *Set[T] {
+	intersectionSet := New[T]()
+	values := st.Items
+	otherValues := otherSet.Items
+	biggerSet := values
+	smallerSet := otherValues
+	if len(otherValues)-len(values) > 0 {
+		biggerSet = otherValues
+		smallerSet = values
+	}
+	for item := range smallerSet {
+		if biggerSet[item] {
+			intersectionSet.Add(item)
+		}
+	}
+	return intersectionSet
+}
