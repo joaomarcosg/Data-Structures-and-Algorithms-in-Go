@@ -50,3 +50,15 @@ func (st *Set[T]) Values() []T {
 	}
 	return keys
 }
+
+// Union returns a new set with elements from both sets
+func (st *Set[T]) Union(otherSet Set[T]) Set[T] {
+	unionSet := New[T]()
+	for i := range st.Items {
+		unionSet.Add(i)
+	}
+	for i := range otherSet.Items {
+		unionSet.Add(i)
+	}
+	return *unionSet
+}
