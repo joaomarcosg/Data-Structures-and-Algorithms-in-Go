@@ -81,3 +81,15 @@ func (st *Set[T]) Intersection(otherSet *Set[T]) *Set[T] {
 	}
 	return intersectionSet
 }
+
+// Difference returns a new set with elements present in the first set but not in the second
+func (st *Set[T]) Difference(otherSet *Set[T]) *Set[T] {
+	differenceSet := New[T]()
+	values := st.Items
+	for item := range values {
+		if !otherSet.Has(item) {
+			differenceSet.Add(item)
+		}
+	}
+	return differenceSet
+}
