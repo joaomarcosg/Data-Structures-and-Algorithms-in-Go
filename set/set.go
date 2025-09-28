@@ -93,3 +93,20 @@ func (st *Set[T]) Difference(otherSet *Set[T]) *Set[T] {
 	}
 	return differenceSet
 }
+
+// IsSubsetOf returns true if a set is a subset of another
+func (st *Set[T]) IsSubsetOf(otherSet *Set[T]) bool {
+	if len(st.Items) > len(otherSet.Items) {
+		return false
+	}
+	isSubset := true
+	values := st.Items
+	for item := range values {
+		if !otherSet.Has(item) {
+			isSubset = false
+			return false
+		}
+		return true
+	}
+	return isSubset
+}
