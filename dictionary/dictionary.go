@@ -35,3 +35,9 @@ func (d *Dictionary[T]) Remove(key string) bool {
 	}
 	return false
 }
+
+// Get returns a specific value from Dictionary using key as search parameter
+func (d *Dictionary[T]) Get(key string) (T, bool) {
+	value, ok := d.Table[key]
+	return value, ok
+}
