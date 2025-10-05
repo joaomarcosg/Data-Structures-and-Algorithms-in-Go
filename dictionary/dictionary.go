@@ -11,3 +11,9 @@ func NewDictionary[T comparable]() *Dictionary[T] {
 		Table: make(map[string]T),
 	}
 }
+
+// Haskey returns true if key is present in the dictionary, and false otherwise
+func (d *Dictionary[T]) HasKey(key string) bool {
+	_, ok := d.Table[key]
+	return ok
+}
