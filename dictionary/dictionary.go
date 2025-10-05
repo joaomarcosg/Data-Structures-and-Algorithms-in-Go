@@ -26,3 +26,12 @@ func (d *Dictionary[T]) Set(key string, value T) bool {
 	}
 	return false
 }
+
+// Remove removes an element from Dictionary using key as parameter
+func (d *Dictionary[T]) Remove(key string) bool {
+	if d.HasKey(key) {
+		delete(d.Table, key)
+		return true
+	}
+	return false
+}
