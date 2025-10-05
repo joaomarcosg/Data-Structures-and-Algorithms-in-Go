@@ -56,3 +56,12 @@ func (d *Dictionary[T]) KeyValues() []KeyValue[T] {
 	}
 	return valuePairs
 }
+
+// Keys return an array with all keys in the Dictionary
+func (d *Dictionary[T]) Keys() []string {
+	var keys []string
+	for key := range d.Table {
+		keys = append(keys, key)
+	}
+	return keys
+}
