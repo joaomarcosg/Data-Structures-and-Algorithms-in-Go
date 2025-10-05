@@ -12,6 +12,12 @@ func NewDictionary[T comparable]() *Dictionary[T] {
 	}
 }
 
+// KeyValue represents the key, value pair
+type KeyValue[T comparable] struct {
+	Key   string
+	Value T
+}
+
 // Haskey returns true if key is present in the dictionary, and false otherwise
 func (d *Dictionary[T]) HasKey(key string) bool {
 	_, ok := d.Table[key]
@@ -40,4 +46,13 @@ func (d *Dictionary[T]) Remove(key string) bool {
 func (d *Dictionary[T]) Get(key string) (T, bool) {
 	value, ok := d.Table[key]
 	return value, ok
+}
+
+// KeyValues returns an array with all value pairs in the Dictionary
+func (d *Dictionary[T]) KeyValues() []KeyValue[T] {
+	valuePairs := make([]KeyValue[T], 0, len(d.Table))
+	for key, value := range d.Table {
+		valuePairs = append(valuePairs, KeyValue[T]{Key: key, Value: value})
+	}
+	return valuePairs
 }
