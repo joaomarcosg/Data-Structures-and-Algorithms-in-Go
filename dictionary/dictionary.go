@@ -79,3 +79,8 @@ func (d *Dictionary[T]) Values() []T {
 func (d *Dictionary[T]) Size() int {
 	return len(d.Table)
 }
+
+// IsEmpty returns true if the Dictionary is empty
+func (d *Dictionary[T]) IsEmpty() bool {
+	return d.Size() == 0
+}
