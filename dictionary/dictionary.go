@@ -74,3 +74,8 @@ func (d *Dictionary[T]) Values() []T {
 	}
 	return values
 }
+
+// Size returns the numbers of elements in the Dictionary
+func (d *Dictionary[T]) Size() int {
+	return len(d.Table)
+}
