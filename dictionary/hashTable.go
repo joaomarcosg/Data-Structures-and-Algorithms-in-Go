@@ -55,3 +55,17 @@ func (h *HashTable[T]) Get(key string) (T, bool) {
 	}
 	return valuePair.Value, true
 }
+
+// Remove removes an item from hash table
+func (h *HashTable[T]) Remove(key string) bool {
+	if key == "" {
+		return false
+	}
+	hash := h.HashCode(key)
+	_, exists := h.Table[hash]
+	if !exists {
+		return false
+	}
+	delete(h.Table, hash)
+	return true
+}
