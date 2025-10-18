@@ -2,14 +2,20 @@ package dictionary
 
 // HashTable represents a hash table
 type HashTable[T comparable] struct {
-	Table map[int]T
+	Table map[int]ValuePair[T]
 }
 
 // NewHashTable creates and returns a new hash table
 func NewHashTable[T comparable]() *HashTable[T] {
 	return &HashTable[T]{
-		Table: make(map[int]T),
+		Table: make(map[int]ValuePair[T]),
 	}
+}
+
+// Value represents the key, value pair
+type ValuePair[T comparable] struct {
+	Key   string
+	Value T
 }
 
 // loseloseHashCode is a simple hash function
