@@ -31,3 +31,13 @@ func loseloseHashCode(key string) int {
 func (h *HashTable[T]) HashCode(key string) int {
 	return loseloseHashCode(key)
 }
+
+// Put adds a new item to the hash table
+func (h *HashTable[T]) Put(key string, value T) bool {
+	if key != "" {
+		position := h.HashCode(key)
+		h.Table[position] = ValuePair[T]{Key: key, Value: value}
+		return true
+	}
+	return false
+}
