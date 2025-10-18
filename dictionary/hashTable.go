@@ -1,11 +1,11 @@
 package dictionary
 
-// HashTable represents a hash map
+// HashTable represents a hash table
 type HashTable[T comparable] struct {
 	Table map[string]T
 }
 
-// NewHashTable creates and returns a new hash map
+// NewHashTable creates and returns a new hash table
 func NewHashTable[T comparable]() *HashTable[T] {
 	return &HashTable[T]{
 		Table: make(map[string]T),
