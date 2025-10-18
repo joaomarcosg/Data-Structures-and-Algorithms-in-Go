@@ -41,3 +41,17 @@ func (h *HashTable[T]) Put(key string, value T) bool {
 	}
 	return false
 }
+
+// Get returns a value found by key
+func (h *HashTable[T]) Get(key string) (T, bool) {
+	var zero T
+	if key == "" {
+		return zero, false
+	}
+	position := h.HashCode(key)
+	valuePair, exists := h.Table[position]
+	if !exists {
+		return zero, false
+	}
+	return valuePair.Value, true
+}
