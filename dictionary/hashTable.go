@@ -2,13 +2,13 @@ package dictionary
 
 // HashTable represents a hash table
 type HashTable[T comparable] struct {
-	Table map[string]T
+	Table map[int]T
 }
 
 // NewHashTable creates and returns a new hash table
 func NewHashTable[T comparable]() *HashTable[T] {
 	return &HashTable[T]{
-		Table: make(map[string]T),
+		Table: make(map[int]T),
 	}
 }
 
