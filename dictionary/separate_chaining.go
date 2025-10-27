@@ -51,3 +51,25 @@ func (h *HashTableSeparateChaining[T]) Put(key string, value T) bool {
 
 	return false
 }
+
+// Get returns a value found by key
+func (h *HashTableSeparateChaining[T]) Get(key string) (T, bool) {
+	var zero T
+	if key == "" {
+		return zero, false
+	}
+
+	position := h.HashCodeSeparateChaining(key)
+	list := h.Table[position]
+	if list != nil && !list.IsEmpty() {
+		current := list.GetHead()
+		for current != nil {
+			if current.Element.Key == key {
+				return current.Element.Value, true
+			}
+			current = current.Next
+		}
+	}
+	return zero, false
+
+}
