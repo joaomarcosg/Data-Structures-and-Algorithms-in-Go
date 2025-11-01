@@ -73,3 +73,28 @@ func (h *HashTableSeparateChaining[T]) Get(key string) (T, bool) {
 	return zero, false
 
 }
+
+// Remove removes an item from hash table
+func (h *HashTableSeparateChaining[T]) Remove(key string) bool {
+	if key != "" {
+		position := h.HashCodeSeparateChaining(key)
+		list := h.Table[position]
+
+		if list != nil && !list.IsEmpty() {
+			current := list.GetHead()
+			for current != nil {
+				if current.Element.Key == key {
+					list.Remove(current.Element)
+					if list.IsEmpty() {
+						delete(h.Table, position)
+					}
+					return true
+				}
+				current = current.Next
+			}
+		}
+		return false
+	}
+
+	return false
+}
