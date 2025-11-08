@@ -2,13 +2,13 @@ package dictionary
 
 // HashTableLinearProbing represents a hash table with linear probing technique
 type HashTableLinearProbing[T comparable] struct {
-	Table map[int]ValuePair[T]
+	Table map[int]*PairKeyValue[T]
 }
 
 // NewHashTableLinearProbing creates and returns a new hash table with linear probing technique
-func NewHashTableLinearProbing[T comparable]() *HashTable[T] {
-	return &HashTable[T]{
-		Table: make(map[int]ValuePair[T]),
+func NewHashTableLinearProbing[T comparable]() *HashTableLinearProbing[T] {
+	return &HashTableLinearProbing[T]{
+		Table: make(map[int]*PairKeyValue[T]),
 	}
 }
 
@@ -28,6 +28,6 @@ func loseloseHashCodeLinearProbing(key string) int {
 }
 
 // HashCodeLinearProbing returns the hash code for a given key
-func (h *HashTableSeparateChaining[T]) HashCodeLinearProbing(key string) int {
+func (h *HashTableLinearProbing[T]) HashCodeLinearProbing(key string) int {
 	return loseloseHashCodeLinearProbing(key)
 }
