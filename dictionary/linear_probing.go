@@ -54,3 +54,29 @@ func (h *HashTableLinearProbing[T]) Put(key string, value T) bool {
 	}
 	return false
 }
+
+// Get returns a value found by key
+func (h *HashTableLinearProbing[T]) Get(key string) (T, bool) {
+	var zero T
+	if key == "" {
+		return zero, false
+	}
+
+	position := h.HashCodeLinearProbing(key)
+	start := position
+
+	for {
+		if h.Table[position] != nil {
+			if h.Table[position].Key == key {
+				return h.Table[position].Value, true
+			}
+
+			position = (position + 1) % 37
+
+			if position == start {
+				return zero, false
+			}
+		}
+
+	}
+}
