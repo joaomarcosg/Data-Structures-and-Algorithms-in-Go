@@ -31,3 +31,26 @@ func loseloseHashCodeLinearProbing(key string) int {
 func (h *HashTableLinearProbing[T]) HashCodeLinearProbing(key string) int {
 	return loseloseHashCodeLinearProbing(key)
 }
+
+// Put adds a new item to the hash table
+func (h *HashTableLinearProbing[T]) Put(key string, value T) bool {
+	if key != "" {
+		position := h.HashCodeLinearProbing(key)
+		start := position
+
+		for {
+
+			if h.Table[position] == nil || h.Table[position].Key == key {
+				h.Table[position] = &PairKeyValue[T]{Key: key, Value: value}
+				return true
+			}
+
+			position = (position + 1) % 37
+
+			if position == start {
+				return false
+			}
+		}
+	}
+	return false
+}
