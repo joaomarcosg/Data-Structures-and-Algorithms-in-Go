@@ -96,3 +96,26 @@ func (h *HashTableLinearProbing[T]) Get(key string) (T, bool) {
 
 	}
 }
+
+// Remove removes an item from hash table
+func (h *HashTableLinearProbing[T]) Remove(key string) bool {
+	if key == "" {
+		return false
+	}
+	position := h.HashCodeLinearProbing(key)
+	start := position
+
+	for {
+		if h.Table[position] != nil {
+			if h.Table[position].Key == key {
+				h.Table[position] = nil
+				h.VerifyRemoveSideEffect(key, position)
+				return true
+			}
+			position = (position + 1) % 37
+			if position == start {
+				return false
+			}
+		}
+	}
+}
