@@ -32,6 +32,22 @@ func (h *HashTableLinearProbing[T]) HashCodeLinearProbing(key string) int {
 	return loseloseHashCodeLinearProbing(key)
 }
 
+// VerifyRemoveSideEffect checks for any side effects during removal
+func (h *HashTableLinearProbing[T]) VerifyRemoveSideEffect(key string, removedPosition int) {
+	hash := h.HashCodeLinearProbing(key)
+	index := (removedPosition + 1) % 37
+
+	for h.Table[index] != nil {
+		posHash := h.HashCodeLinearProbing(h.Table[index].Key)
+		if posHash <= hash || posHash <= removedPosition {
+			h.Table[removedPosition] = h.Table[posHash]
+			h.Table[posHash] = nil
+			removedPosition = index
+		}
+		index = (index + 1) % 37
+	}
+}
+
 // Put adds a new item to the hash table
 func (h *HashTableLinearProbing[T]) Put(key string, value T) bool {
 	if key != "" {
