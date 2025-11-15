@@ -27,6 +27,15 @@ func loseloseHashCode(key string) int {
 	return hash % 37
 }
 
+// djb2HashCode is a hash function with fewer collisions
+func djb2HashCode(key string) int {
+	hash := 5381
+	for i := 0; i < len(key); i++ {
+		hash = (hash * 33) + int(key[i])
+	}
+	return hash % 1013
+}
+
 // HashCode returns the hash code for a given key
 func (h *HashTable[T]) HashCode(key string) int {
 	return loseloseHashCode(key)
