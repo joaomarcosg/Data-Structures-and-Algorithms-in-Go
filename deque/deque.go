@@ -63,6 +63,11 @@ func (dq *Deque[T]) RearDeque() (T, bool) {
 	return dq.items[len(dq.items)-1], true
 }
 
+// Size returns the number of elements in the deque
+func (dq *Deque[T]) Size() int {
+	return len(dq.items)
+}
+
 // IsEmpty returns true if the deque is empty
 func (dq *Deque[T]) IsEmpty() bool {
 	return len(dq.items) == 0
